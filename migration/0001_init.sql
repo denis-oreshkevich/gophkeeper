@@ -16,13 +16,13 @@ create table if not exists keeper.client(
     user_id uuid not null,
     sync_tms timestamp not null default CURRENT_TIMESTAMP,
     constraint client_pkey primary key (id),
-    constraint fk_client_usr_id foreign key(user_id) references usr(id)
+    constraint fk_client_usr_id foreign key(user_id) references keeper.usr(id)
 );
 
 create table if not exists keeper.cred(
     id uuid not null,
-    login varchar(64) not null,
-    password varchar(128) not null,
+    login varchar(128) not null,
+    password varchar(256) not null,
     user_id uuid not null,
     status varchar(8) not null default 'ACTIVE',
     modified_tms timestamp not null,
@@ -31,11 +31,11 @@ create table if not exists keeper.cred(
 
 create table if not exists keeper.txt(
     id uuid not null,
-    txt text not null,
+    val text not null,
     user_id uuid not null,
-    status varchar(8) not null default 'ACTIVE'
+    status varchar(8) not null default 'ACTIVE',
     modified_tms timestamp not null,
-    constraint cred_pkey primary key (id)
+    constraint txt_pkey primary key (id)
 );
 
 create table if not exists keeper.binary(
@@ -43,19 +43,19 @@ create table if not exists keeper.binary(
     f_name varchar(1024) not null,
     "data" text not null,
     user_id uuid not null,
-    status varchar(8) not null default 'ACTIVE'
+    status varchar(8) not null default 'ACTIVE',
     modified_tms timestamp not null,
-    constraint cred_pkey primary key (id)
+    constraint binary_pkey primary key (id)
 );
 
 create table if not exists keeper.card(
     id uuid not null,
-    num varchar(16) not null,
-    cvc varchar(3) not null,
+    num varchar(128) not null,
+    cvc varchar(128) not null,
     holder_name varchar(128) not null,
     user_id uuid not null,
-    status varchar(8) not null default 'ACTIVE'
+    status varchar(8) not null default 'ACTIVE',
     modified_tms timestamp not null,
-    constraint cred_pkey primary key (id)
+    constraint card_pkey primary key (id)
 );
 -- +goose Down

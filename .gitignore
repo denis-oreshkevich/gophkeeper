@@ -13,8 +13,8 @@
 *.out
 
 # Binaries
-cmd/gophkeeper/client
-cmd/gophkeeper/server
+cmd/client
+cmd/server
 
 # Dependency directories (remove the comment below to include it)
 vendor/
@@ -25,3 +25,8 @@ vendor/
 
 #Certs
 certs
+server/certs
+
+Dir to save files on client
+saved
+saved2
